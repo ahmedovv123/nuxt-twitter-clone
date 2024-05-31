@@ -39,7 +39,6 @@ export default defineEventHandler(async (event) => {
 
   // Add http only cookie
 
-  console.log(event)
   sendRefreshToken(event, refreshToken)
 
   return {
