@@ -4,7 +4,7 @@ const generateAccessToken = (user) => {
   const config = useRuntimeConfig()
 
   return jwt.sign({userId: user.id}, config.jwtAccessSecret, {
-    expiresIn: '3m'
+    expiresIn: '10m'
   })
 }
 

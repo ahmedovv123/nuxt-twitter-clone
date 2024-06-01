@@ -1,6 +1,6 @@
 <script setup>
 import { HomeIcon } from '@heroicons/vue/solid'
-import {HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UsersIcon, DotsCircleHorizontalIcon} from '@heroicons/vue/outline'
+import {HashtagIcon, BellIcon, InboxIcon, BookmarkIcon, DocumentTextIcon, UsersIcon, DotsCircleHorizontalIcon, PencilIcon} from '@heroicons/vue/outline'
 const { defaultTransition } = useTailwindConfig()
 
 </script>
@@ -79,6 +79,22 @@ const { defaultTransition } = useTailwindConfig()
           More
         </template>
       </SidebarLeftTab>
+
+      <div class="hidden xl:block">
+        <UIButton liquid size="lg">
+          <strong>
+            Tweet
+          </strong>
+        </UIButton>
+      </div>
+
+      <div class="block xl:hidden">
+        <UIButton>
+          <div class="w-6 h-6 font-bold">
+            <PencilIcon />
+          </div>
+        </UIButton>
+      </div>
     </div>
   </div>
 </template>
