@@ -1,13 +1,42 @@
 <script setup>
 const darkMode = ref(false)
-const {useAuthUser, initAuth, useAuthLoading} = useAuth()
+const {useAuthUser, initAuth, useAuthLoading, logout} = useAuth()
 
 const isAuthLoading = useAuthLoading()
 const user = useAuthUser()
+const {closePostTweetModal, openPostTweetModal, useReplyTweet} = useTweets()
+const emitter = useEmitter()
+const replyTweet = useReplyTweet()
 
+emitter.$on('replyTweet', (tweet) => {
+  openPostTweetModal(tweet)
+})
 onBeforeMount(() => {
   initAuth()
 })
+
+const handleFormSuccess = (tweet) => {
+  handleCloseModal()
+  navigateTo({
+    path: `/status/${tweet.id}`
+  })
+}
+
+const handleCloseModal = () => {
+  closePostTweetModal()
+}
+
+const handleOpenModal = () => {
+  openPostTweetModal(null)
+}
+
+const handleToggleDarkMode = () => {
+  darkMode.value = !darkMode.value
+}
+
+const handleUserLogout = () => {
+ logout()
+}
 </script>
 
 <template>
@@ -21,7 +50,7 @@ onBeforeMount(() => {
           <!-- Left sidebar -->
           <div class="hidden md:block xs:col-span-1 xl:col-span-2">
             <div class="sticky top-0">
-              <SidebarLeft />
+              <SidebarLeft @onTweet="handleOpenModal" @onLogout="handleUserLogout" />
             </div>
           </div>
 
@@ -33,13 +62,17 @@ onBeforeMount(() => {
           <!-- Right sidebar -->
           <div class="hidden md:block xl:col-span-4 md:col-span-3">
             <div class="sticky top-0">
-              <SidebarRight />
+              <SidebarRight @toggleDarkMode="handleToggleDarkMode" />
             </div>
           </div>
         </div>
 
       </div>
       <AuthPage v-else />
+
+      <UIModal @closeModal="handleCloseModal">
+        <TweetForm @onSuccess="handleFormSuccess" showReply :replyTo="replyTweet" />
+      </UIModal>
     </div>
   </div>
 </template>

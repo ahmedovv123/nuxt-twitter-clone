@@ -1,8 +1,12 @@
 <script setup>
 defineProps({
   user: {
-    tye: Object,
+    type: Object,
     required: true
+  },
+  placeholder: {
+    type: String,
+    required: true,
   }
 })
 
@@ -50,7 +54,7 @@ const handleImageChange = (event) => {
       </div>
       <div class="w-full p-2">
         <textarea
-            placeholder="What's happening?"
+            :placeholder="placeholder"
             v-model="text"
             class="w-full h-12 text-lg text-gray-900 placeholder:text-gray-400 bg-transparent border-0 dark:text-white focus:ring-0"/>
       </div>

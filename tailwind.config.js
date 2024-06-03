@@ -9,6 +9,32 @@ export default {
     "./error.vue",
   ],
   darkMode: 'class',
+  safelist: [
+    {
+      pattern: /text-(red|green|blue|yellow)-(100|400)/,
+      variants: ['group-hover']
+    },
+    {
+      pattern: /bg-(red|green|blue|yellow)-(100|400)/,
+      variants: ['group-hover']
+    },
+    {
+      pattern: /transition/
+    },
+    {
+      pattern: /ease-in-out/
+    },
+    {
+      pattern: /duration-300/
+    },
+    {
+      pattern: /border-white-200/
+    },
+    {
+      pattern: /border-gray-700/,
+      variants: ['dark']
+    }
+  ],
   theme: {
     screens: {
       xs: "614px",
